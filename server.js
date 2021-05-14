@@ -5,17 +5,15 @@ const knex = require("knex");
 
 const register = require("./controllers/register");
 const signin = require("./controllers/signin");
-const profile = require('./controllers/profile');
-const image = require('./controllers/image');
+const profile = require("./controllers/profile");
+const image = require("./controllers/image");
 
 //connecting server to database
 const db = knex({
   client: "pg",
   connection: {
-    host: "127.0.0.1", //local host
-    user: "postgres", //user
-    password: "789456",
-    database: "facer",
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
   },
 });
 
@@ -54,12 +52,12 @@ app.get("/profile/:id", (req, res) => {
 });
 
 //image
-app.put("/image", (req, res)=>{
+app.put("/image", (req, res) => {
   image.handleImage(req, res, db);
 });
 
 //Api
-app.post("/imageurl", (req, res)=>{
+app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 

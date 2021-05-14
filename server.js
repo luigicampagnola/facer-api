@@ -19,11 +19,11 @@ const db = knex({
   },
 });
 
-db.select("*")
+/* db.select("*")
   .from("users")
   .then((data) => {
     console.log(data);
-  });
+  }); */
 
 //server
 const app = express();
